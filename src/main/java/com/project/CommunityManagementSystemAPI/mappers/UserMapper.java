@@ -11,6 +11,5 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     Users toEntity(RegisterRequest request);
 
-    @Mapping(target = "userId", source = "id")
     RegisterResponse toDto(Users entity);
 }
