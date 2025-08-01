@@ -1,8 +1,3 @@
-Here's the **corrected and cleaned-up version** of your Markdown:
-
----
-
-```markdown
 # 🏘️ Community Management System API
 
 ⚠️ *This API is currently under active development.*
