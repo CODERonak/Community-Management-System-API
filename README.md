@@ -1,10 +1,11 @@
+Here's the **corrected and cleaned-up version** of your Markdown:
 
 ---
 
-```
+```markdown
 # 🏘️ Community Management System API
 
-* ⚠️ This API is currently under active development.
+⚠️ *This API is currently under active development.*
 
 A scalable, production-ready **Java Spring Boot API** for managing users, communities, posts, and comments — built with clean architecture and ready for cloud deployment.
 
@@ -24,19 +25,19 @@ A scalable, production-ready **Java Spring Boot API** for managing users, commun
 
 ## 🚀 Tech Stack
 
-| Technology            | Purpose                               |
-|-----------------------|----------------------------------------|
-| Spring Boot           | Core framework                        |
-| Spring Web            | REST API support                      |
-| Spring Data JPA       | Database interactions                 |
-| Spring Security       | Authentication & authorization        |
-| Hibernate Validator   | Input validation                      |
-| Lombok                | Boilerplate code reduction            |
-| MapStruct             | DTO <-> Entity mapping                |
-| MySQL / PostgreSQL    | Relational database                   |
-| Spring Boot Actuator  | Monitoring & health checks            |
-| Spring Cloud (optional)| Config & discovery                   |
-| Google Cloud          | Cloud deployment                      |
+| Technology             | Purpose                               |
+|------------------------|----------------------------------------|
+| Spring Boot            | Core framework                         |
+| Spring Web             | REST API support                       |
+| Spring Data JPA        | Database interactions                  |
+| Spring Security        | Authentication & authorization         |
+| Hibernate Validator    | Input validation                       |
+| Lombok                 | Boilerplate code reduction             |
+| MapStruct              | DTO <-> Entity mapping                 |
+| MySQL / PostgreSQL     | Relational database                    |
+| Spring Boot Actuator   | Monitoring & health checks             |
+| Spring Cloud (optional)| Config & discovery                     |
+| Google Cloud           | Cloud deployment                       |
 
 ---
 
@@ -59,7 +60,7 @@ src/
 │       ├── exception/
 │       └── mapper/
 └── resources/
-├── application.propertites
+├── application.properties
 
 ````
 
