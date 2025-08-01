@@ -1,0 +1,20 @@
+package com.project.CommunityManagementSystemAPI.dto.auth;
+
+import com.project.CommunityManagementSystemAPI.model.enums.Role;
+
+import jakarta.validation.constraints.*;
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class RegisterRequest {
+   @Email(message = "Invalid email format")
+   private String email;
+
+   @Size(min = 8, message = "Password must be at least 8 characters long")
+   private String password;
+
+   @NotNull(message = "Role cannot be null")
+   private Role role;
+}
