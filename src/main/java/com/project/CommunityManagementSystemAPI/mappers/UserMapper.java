@@ -2,6 +2,7 @@ package com.project.CommunityManagementSystemAPI.mappers;
 
 import org.mapstruct.*;
 
+import com.project.CommunityManagementSystemAPI.dto.auth.LoginResponse;
 import com.project.CommunityManagementSystemAPI.dto.auth.RegisterRequest;
 import com.project.CommunityManagementSystemAPI.dto.auth.RegisterResponse;
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
@@ -12,4 +13,7 @@ public interface UserMapper {
     Users toEntity(RegisterRequest request);
 
     RegisterResponse toDto(Users entity);
+
+    @Mapping(target = "token", ignore = true)
+    LoginResponse toLoginResponse(Users user);
 }
