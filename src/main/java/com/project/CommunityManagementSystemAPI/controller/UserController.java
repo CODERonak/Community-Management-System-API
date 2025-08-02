@@ -21,4 +21,10 @@ public class UserController {
         RegisterResponse response = service.register(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse response = service.login(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
