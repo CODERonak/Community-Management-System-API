@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.CommunityManagementSystemAPI.dto.auth.*;
-import com.project.CommunityManagementSystemAPI.service.UserService;
+import com.project.CommunityManagementSystemAPI.service.AuthService;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -13,8 +13,8 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
-public class UserController {
-    private final UserService service;
+public class AuthController {
+    private final AuthService service;
 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) {

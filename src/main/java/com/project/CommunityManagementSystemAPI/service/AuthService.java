@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.CommunityManagementSystemAPI.dto.auth.*;
 import com.project.CommunityManagementSystemAPI.jwt.JWTUtil;
-import com.project.CommunityManagementSystemAPI.mappers.UserMapper;
+import com.project.CommunityManagementSystemAPI.mappers.AuthMapper;
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
 import com.project.CommunityManagementSystemAPI.repository.UserRepository;
 
@@ -18,9 +18,9 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class AuthService {
     private final UserRepository userRepository;
-    private final UserMapper mapper;
+    private final AuthMapper mapper;
     private final BCryptPasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
