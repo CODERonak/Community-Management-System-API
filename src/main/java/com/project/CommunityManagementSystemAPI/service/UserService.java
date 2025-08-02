@@ -1,5 +1,7 @@
 package com.project.CommunityManagementSystemAPI.service;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +20,37 @@ public class UserService {
    private final BCryptPasswordEncoder passwordEncoder;
 
    public UserDetailsResponse getMyUserDetails(long userId) {
-      Users user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
 
-      return mapper.toDto(user);
+      Users authenticatedUser = getAuthenticatedUsers();
+
+      if (authenticatedUser.getId() != userId) {
+         throw new RuntimeException("You are not authorized to view this user's details.");
+      }
+
+      return mapper.toDto(authenticatedUser);
    }
 
    public UserDetailsResponse updateUserDetails(long userId, UserDetailsRequest request) {
-      Users user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+      Users authenticatedUser = getAuthenticatedUsers();
 
-      user.setEmail(request.getEmail());
-      user.setPassword(passwordEncoder.encode(request.getPassword()));
+      if (authenticatedUser.getId() != userId) {
+         throw new RuntimeException("You are not authorized to update this user's details.");
+      }
 
-      Users updatedUser = userRepository.save(user);
+      authenticatedUser.setEmail(request.getEmail());
+      authenticatedUser.setPassword(passwordEncoder.encode(request.getPassword()));
+
+      Users updatedUser = userRepository.save(authenticatedUser);
 
       return mapper.toDto(updatedUser);
+   }
+
+   private Users getAuthenticatedUsers() {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+      String authenticatedUserEmail = auth.getName();
+
+      return userRepository.findByEmail(authenticatedUserEmail)
+            .orElseThrow(() -> new RuntimeException("User not found"));
    }
 
 }
