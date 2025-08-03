@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.project.CommunityManagementSystemAPI.exceptions.ErrorResponse;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.auth.EmailExistsException;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.auth.LoginFailedException;
 import com.project.CommunityManagementSystemAPI.exceptions.custom.user.*;
 
 @RestControllerAdvice
@@ -28,5 +30,25 @@ public class GlobalExceptionHandler {
                 HttpStatus.FORBIDDEN.getReasonPhrase(),
                 ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(EmailExistsException.class)
+    public ResponseEntity<ErrorResponse> handleEmailExistsException(
+            EmailExistsException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(LoginFailedException.class)
+    public ResponseEntity<ErrorResponse> handleLoginFailedException(
+            LoginFailedException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                HttpStatus.UNAUTHORIZED.getReasonPhrase(),
+                ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }
