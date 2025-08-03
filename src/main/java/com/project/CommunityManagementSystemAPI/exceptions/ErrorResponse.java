@@ -2,6 +2,7 @@ package com.project.CommunityManagementSystemAPI.exceptions;
 
 import lombok.Data;
 
+// DTO for error response with the status, error message and error details
 @Data
 public class ErrorResponse {
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
 
+// Repository for user-related database operations
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
     Optional<Users> findByEmail(String email);

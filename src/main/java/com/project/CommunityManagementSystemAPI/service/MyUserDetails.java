@@ -17,6 +17,7 @@ public class MyUserDetails implements UserDetails {
 
     private final Users user;
 
+    // Get user's authorities ADMIN and MEMBER
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -24,11 +25,13 @@ public class MyUserDetails implements UserDetails {
         return authorities;
     }
 
+    // returns password of user database
     @Override
     public String getPassword() {
         return user.getPassword();
     }
 
+    // returns user's email from the database
     @Override
     public String getUsername() {
         return user.getEmail();

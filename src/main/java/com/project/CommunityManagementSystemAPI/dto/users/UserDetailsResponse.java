@@ -4,6 +4,7 @@ import com.project.CommunityManagementSystemAPI.model.enums.Role;
 
 import lombok.*;
 
+// DTO for user details with id, email, password and role
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

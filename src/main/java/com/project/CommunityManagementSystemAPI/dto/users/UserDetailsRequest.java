@@ -5,6 +5,7 @@ import com.project.CommunityManagementSystemAPI.model.enums.Role;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+// DTO for user registration with email, password and role validation
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

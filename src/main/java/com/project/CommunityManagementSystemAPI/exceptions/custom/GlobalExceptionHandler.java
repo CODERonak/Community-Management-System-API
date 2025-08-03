@@ -10,8 +10,11 @@ import com.project.CommunityManagementSystemAPI.exceptions.custom.auth.EmailExis
 import com.project.CommunityManagementSystemAPI.exceptions.custom.auth.LoginFailedException;
 import com.project.CommunityManagementSystemAPI.exceptions.custom.user.*;
 
+// Global exception handler for custom exceptions
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    // Handling User not found exception while it checks for the user in the database
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFoundException(
             UserNotFoundException ex) {
@@ -22,6 +25,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    // Handling Acess Denied exception for when a user tries to access a endpoint they don't have access to
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponse> handleAcessDeniedException(
             AccessDeniedException ex) {
@@ -32,6 +36,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
+    // Handling Email Exists exception for when a user tries to register with an email that already exists in the database
     @ExceptionHandler(EmailExistsException.class)
     public ResponseEntity<ErrorResponse> handleEmailExistsException(
             EmailExistsException ex) {
@@ -42,6 +47,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
+    // Handling Login Failed exception for when a user tries to login with invalid credentials
     @ExceptionHandler(LoginFailedException.class)
     public ResponseEntity<ErrorResponse> handleLoginFailedException(
             LoginFailedException ex) {

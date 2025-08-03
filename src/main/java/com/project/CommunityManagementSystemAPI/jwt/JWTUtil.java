@@ -12,6 +12,7 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+// JWT utility class for generating, validating, and extracting JWT tokens
 @Component
 public class JWTUtil {
     private static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);

@@ -16,18 +16,21 @@ import com.project.CommunityManagementSystemAPI.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
+// Controller for user details
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
 public class UserController {
     private final UserService service;
 
+    // Get the current user's details and return it
     @GetMapping("/{id}")
     public ResponseEntity<UserDetailsResponse> getMyDetails(@PathVariable long id) {
         UserDetailsResponse response = service.getMyUserDetails(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // Update the current user's details and return the updated details
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDetailsResponse> updateMyDetails(@PathVariable long id,
             @Valid @RequestBody UserDetailsRequest request) {

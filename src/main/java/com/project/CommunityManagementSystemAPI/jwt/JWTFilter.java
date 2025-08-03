@@ -17,6 +17,7 @@ import com.project.CommunityManagementSystemAPI.service.MyUserDetailsService;
 
 import java.io.IOException;
 
+// this class is used to filter the requests
 @Component
 @AllArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {

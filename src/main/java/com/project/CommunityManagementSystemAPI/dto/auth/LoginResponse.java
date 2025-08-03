@@ -2,6 +2,7 @@ package com.project.CommunityManagementSystemAPI.dto.auth;
 
 import lombok.*;
 
+// DTO for user returning token
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
