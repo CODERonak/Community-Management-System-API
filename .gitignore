@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 .idx/
+
+# ignored and removed the history
+application.properties
