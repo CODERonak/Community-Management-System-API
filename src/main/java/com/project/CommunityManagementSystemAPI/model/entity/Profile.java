@@ -19,9 +19,9 @@ public class Profile {
     @Column(nullable = false, unique = true) 
     private String username;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private Users userId;
+    private Users user;
 
     LocalDate dateOfBirth;
 
