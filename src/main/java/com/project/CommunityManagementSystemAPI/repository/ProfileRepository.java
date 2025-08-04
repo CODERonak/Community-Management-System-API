@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.project.CommunityManagementSystemAPI.model.entity.Profile;
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
 
+// Repository for profile-related database operations
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Optional<Profile> findByUsername(String username);

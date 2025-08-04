@@ -12,7 +12,8 @@ import com.project.CommunityManagementSystemAPI.exceptions.custom.auth.LoginFail
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-        // Handling User not found exception while it checks for the user in the
+        // Handling not found exception while it checks for the existence of an entity
+        // in the
         // database
         @ExceptionHandler(NotFoundException.class)
         public ResponseEntity<ErrorResponse> handleNotFoundException(
@@ -36,8 +37,8 @@ public class GlobalExceptionHandler {
                 return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
         }
 
-        // Handling Email Exists exception for when a user tries to register with an
-        // email that already exists in the database
+        // Handling Already Exists exception for when a entity already exists in the
+        // database
         @ExceptionHandler(AlreadyExistsException.class)
         public ResponseEntity<ErrorResponse> handleAlreadyExistsException(
                         AlreadyExistsException ex) {

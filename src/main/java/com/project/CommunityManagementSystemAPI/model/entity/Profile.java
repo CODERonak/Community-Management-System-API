@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 import lombok.*;
 
-// Entity for user details
+// Entity for profile details
 @Entity
 @Data
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true) 
+    @Column(nullable = false, unique = true)
     private String username;
 
     @OneToOne(fetch = FetchType.EAGER)

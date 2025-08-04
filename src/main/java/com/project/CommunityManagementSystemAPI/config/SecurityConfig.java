@@ -42,12 +42,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        // authorizing the endpoints 
+                // authorizing the endpoints
                 .authorizeHttpRequests(requests -> requests
+                        // public endpoints
                         .requestMatchers("/api/auth/**", "/api/profile/{id}").permitAll()
                         .anyRequest().authenticated())
 
-                        // enabling basic authentication and disabling CSRF
+                // enabling basic authentication and disabling CSRF
                 .httpBasic(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
 

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// DTO for user profile with validation
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
