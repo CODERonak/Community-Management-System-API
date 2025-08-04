@@ -9,39 +9,33 @@ A scalable, production-ready **Java Spring Boot API** for managing users, commun
 
 ---
 
-### 🚨 Note:
-
-* The `application.properties` file has been deleted and is ignored via `.gitignore` for security (as it may contain sensitive properties).
-
----
-
 ## ✅ Features
 
-* 🔐 **User Authentication** (JWT-based)
+* 🔐 **JWT-based Authentication**
 * 🧑‍🤝‍🧑 Community creation & management
-* 📝 Support for posts and comments
+* 📝 Create and manage posts & comments
 * ☁️ **Google Cloud deployment-ready**
-* 🧱 Modular, layered architecture (`Controller → Service → Repository`)
-* 🔄 DTOs with validation and mapping using **MapStruct**
-* 📊 Monitoring with **Spring Boot Actuator**
+* 🧱 Clean, modular architecture (`Controller → Service → Repository`)
+* 🔄 DTOs with validation and mapping via **MapStruct**
+* 📊 Monitoring & health checks using **Spring Boot Actuator**
 
 ---
 
 ## 🚀 Tech Stack
 
-| Technology                  | Purpose                        |
-| --------------------------- | ------------------------------ |
-| **Spring Boot**             | Core framework                 |
-| **Spring Web**              | REST API support               |
-| **Spring Data JPA**         | Database interactions          |
-| **Spring Security**         | Authentication & authorization |
-| **Hibernate Validator**     | Input validation               |
-| **Lombok**                  | Boilerplate code reduction     |
-| **MapStruct**               | DTO <-> Entity mapping         |
-| **MySQL / PostgreSQL**      | Relational database            |
-| **Spring Boot Actuator**    | Monitoring & health checks     |
-| **Spring Cloud (optional)** | Config & service discovery     |
-| **Google Cloud**            | Cloud deployment               |
+| Technology               | Purpose                        |
+| ------------------------ | ------------------------------ |
+| **Spring Boot**          | Core framework                 |
+| **Spring Web**           | REST API support               |
+| **Spring Data JPA**      | Database interactions          |
+| **Spring Security**      | Authentication & authorization |
+| **Hibernate Validator**  | Request validation             |
+| **Lombok**               | Boilerplate code reduction     |
+| **MapStruct**            | DTO ↔ Entity mapping           |
+| **MySQL / PostgreSQL**   | Relational database support    |
+| **Spring Boot Actuator** | Monitoring & health endpoints  |
+| **Spring Cloud** (opt.)  | Config & service discovery     |
+| **Google Cloud**         | Cloud deployment               |
 
 ---
 
@@ -66,23 +60,25 @@ src/
         └── application.properties
 ```
 
+> 🔒 `application.properties` is **excluded from version control** for security reasons (credentials & secrets).
+
 ---
 
 ## 🧱 Core Entities
 
-### ✅ `User`
+### 🧍 `User`
 
-| Field      | Type   | Constraints         |
-| ---------- | ------ | ------------------- |
-| `id`       | Long   | Primary Key         |
-| `fullName` | String | Unique, Not Blank   |
-| `email`    | String | Unique, Valid Email |
-| `password` | String | Encrypted (BCrypt)  |
-| `role`     | Enum   | `ADMIN`, `MEMBER`   |
+| Field      | Type   | Constraints           |
+| ---------- | ------ | --------------------- |
+| `id`       | Long   | Primary Key           |
+| `fullName` | String | Unique, not blank     |
+| `email`    | String | Unique, valid email   |
+| `password` | String | Encrypted with BCrypt |
+| `role`     | Enum   | `ADMIN`, `MEMBER`     |
 
 ---
 
-### ✅ `Role` Enum
+### 🛡️ `Role` Enum
 
 ```java
 public enum Role {
@@ -103,8 +99,6 @@ public enum Role {
 | email    | String | `@Email`, `@NotBlank` |
 | password | String | `@Size(min = 8)`      |
 
----
-
 ### 🔹 `RegisterResponseDTO`
 
 | Field    | Type   |
@@ -117,10 +111,10 @@ public enum Role {
 
 ## 🔐 Security
 
-* ✅ JWT-based authentication
-* 🔐 Role-based access (`ADMIN`, `MEMBER`)
-* 🔒 Passwords hashed using **BCrypt**
-* ⚙️ Stateless sessions
+* ✅ JWT-based stateless authentication
+* 🔐 Role-based access control (`ADMIN`, `MEMBER`)
+* 🔒 Passwords are securely hashed using **BCrypt**
+* 🚫 No session state stored on the server
 
 ---
 
@@ -128,36 +122,48 @@ public enum Role {
 
 ### 🛂 **AuthController**
 
-| Method | Endpoint         | Description         |
-| ------ | ---------------- | ------------------- |
-| POST   | `/auth/register` | Register a new user |
-| POST   | `/auth/login`    | Authenticate a user |
+| Method | Endpoint             | Description         |
+| ------ | -------------------- | ------------------- |
+| POST   | `/api/auth/register` | Register a new user |
+| POST   | `/api/auth/login`    | Authenticate a user |
 
 ---
 
 ### 👤 **UserController**
 
-| Method | Endpoint        | Description              |
-| ------ | --------------- | ------------------------ |
-| GET    | `/users/me`     | Get current user profile |
-| PUT    | `/users/update` | Update user profile      |
-
-> **Upcoming:** `ProfileController`, `CommunityController`, `PostController`, `CommentController`
+| Method | Endpoint                 | Description       |
+| ------ | ------------------------ | ----------------- |
+| GET    | `/api/users/{id}`        | Get user by ID    |
+| PUT    | `/api/users/update/{id}` | Update user by ID |
 
 ---
 
-## ⚙️ Application Properties (Example)
+### 🧑‍💼 **ProfileController**
 
-> **Note:** The following values are **example placeholders** and **not actually used** in version control.
+| Method | Endpoint                         | Description                  |
+| ------ | -------------------------------- | ---------------------------- |
+| POST   | `/api/profile/create`            | Create user profile          |
+| GET    | `/api/profile/{username}`        | Get user profile by username |
+| PUT    | `/api/profile/update/{username}` | Update profile by username   |
+
+> **Coming soon:**
+>
+> * `CommunityController`
+> * `PostController`
+> * `CommentController`
+
+---
+
+## ⚙️ Example `application.properties`
+
+> ℹ️ This file is excluded from Git. Below is a **sample** configuration.
 
 ```properties
-# Application Name
+# App Info
 spring.application.name=CommunityManagementSystemAPI
-
-# Profiles
 spring.profiles.active=mysql
 
-# Database Configuration (Google Cloud SQL)
+# DB Config (Google Cloud SQL)
 spring.cloud.gcp.sql.database-name=COMMUNITY
 spring.cloud.gcp.sql.instance-connection-name=my-instance
 spring.datasource.username=myusername
@@ -169,22 +175,26 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
-# Security
+# Security Credentials
 spring.security.user.name=boot
 spring.security.user.password=spring
 
-# JWT
+# JWT Configuration
 jwt.secret=901847532619803764821593740128567923487
 jwt.expiration=360000000
 ```
 
 ---
 
-## ☁️ Google Cloud Deployment (Planned)
+## ☁️ Google Cloud Deployment
 
-* ✅ Dockerize the application
-* ✅ Connect to **Cloud SQL** (MySQL/PostgreSQL)
-* ⛔ Optional: Use **Spring Cloud Config Server**
-* 🚀 Deploy to **Cloud Run**, **App Engine**, or **Compute Engine**
+* ✅ Dockerized Spring Boot application
+* ✅ Connects to **Cloud SQL (MySQL/PostgreSQL)**
+* ⛔ Optional: Spring Cloud Config Server
+* 🚀 Supports deployment to:
+
+  * **Cloud Run**
+  * **App Engine**
+  * **Compute Engine**
 
 ---
