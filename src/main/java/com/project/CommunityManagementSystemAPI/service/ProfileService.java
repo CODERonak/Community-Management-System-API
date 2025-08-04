@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.CommunityManagementSystemAPI.dto.profile.*;
 import com.project.CommunityManagementSystemAPI.exceptions.custom.AccessDeniedException;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.AlreadyExistsException;
 import com.project.CommunityManagementSystemAPI.exceptions.custom.NotFoundException;
 import com.project.CommunityManagementSystemAPI.mappers.ProfileMapper;
 import com.project.CommunityManagementSystemAPI.model.entity.Profile;
@@ -26,6 +27,18 @@ public class ProfileService {
 
         Users user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new NotFoundException("User not found, please register first"));
+
+        if (profileRepository.existsByUsername(request.getUsername())) {
+            throw new AlreadyExistsException("Username has already been taken by someone else, please choose another");
+        }
+
+        if (userRepository.findById(request.getUserId()).isEmpty()) {
+            throw new AccessDeniedException("You are not authorized to access the page, register first");
+        }
+
+        if (profileRepository.findByUser(user).isPresent()) {
+            throw new AlreadyExistsException("You already have a profile");
+        }
 
         Profile profile = mapper.toEntity(request, user);
         profileRepository.save(profile);
