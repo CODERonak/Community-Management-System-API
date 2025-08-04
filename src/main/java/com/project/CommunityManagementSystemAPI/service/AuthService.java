@@ -10,8 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.CommunityManagementSystemAPI.dto.auth.*;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.AlreadyExistsException;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.NotFoundException;
 import com.project.CommunityManagementSystemAPI.exceptions.custom.auth.*;
-import com.project.CommunityManagementSystemAPI.exceptions.custom.user.UserNotFoundException;
 import com.project.CommunityManagementSystemAPI.jwt.JWTUtil;
 import com.project.CommunityManagementSystemAPI.mappers.AuthMapper;
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
@@ -44,7 +45,7 @@ public class AuthService {
             // if successful, returns the user's details
         } catch (DataIntegrityViolationException e) {
             // if email already exists, throws an exception
-            throw new EmailExistsException("Email already exists");
+            throw new AlreadyExistsException("Email already exists");
         }
 
         // returns the user's details
@@ -67,7 +68,7 @@ public class AuthService {
 
             // finds the user by email
             Users loggedInUser = userRepository.findByEmail(request.getEmail())
-                    .orElseThrow(() -> new UserNotFoundException("User not found"));
+                    .orElseThrow(() -> new NotFoundException("User not found"));
 
             LoginResponse response = mapper.toLoginResponse(loggedInUser);
 

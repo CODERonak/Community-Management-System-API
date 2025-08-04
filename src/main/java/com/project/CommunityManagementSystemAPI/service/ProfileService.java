@@ -5,8 +5,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.project.CommunityManagementSystemAPI.dto.profile.*;
-import com.project.CommunityManagementSystemAPI.exceptions.custom.user.AccessDeniedException;
-import com.project.CommunityManagementSystemAPI.exceptions.custom.user.UserNotFoundException;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.AccessDeniedException;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.NotFoundException;
 import com.project.CommunityManagementSystemAPI.mappers.ProfileMapper;
 import com.project.CommunityManagementSystemAPI.model.entity.Profile;
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
@@ -25,7 +25,7 @@ public class ProfileService {
     public ProfileResponse createProfile(ProfileRequest request) {
 
         Users user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new UserNotFoundException("User not found, please register first"));
+                .orElseThrow(() -> new NotFoundException("User not found, please register first"));
 
         Profile profile = mapper.toEntity(request, user);
         profileRepository.save(profile);
@@ -35,7 +35,7 @@ public class ProfileService {
     public ProfileResponse getProfile(String username) {
 
         Profile profile = profileRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("Profile not found"));
+                .orElseThrow(() -> new NotFoundException("Profile not found"));
 
         return mapper.toDto(profile);
     }
@@ -45,7 +45,7 @@ public class ProfileService {
         Users authenticatedUser = getAuthenticatedUser();
 
         Profile profileToUpdate = profileRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("Profile not found"));
+                .orElseThrow(() -> new NotFoundException("Profile not found"));
 
         if (authenticatedUser.getId() != profileToUpdate.getUser().getId()) {
             throw new AccessDeniedException("You are not authorized to update this profile.");
@@ -65,6 +65,6 @@ public class ProfileService {
         String authenticatedUserEmail = auth.getName();
 
         return userRepository.findByEmail(authenticatedUserEmail)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 }

@@ -6,7 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.CommunityManagementSystemAPI.dto.users.*;
-import com.project.CommunityManagementSystemAPI.exceptions.custom.user.*;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.AccessDeniedException;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.NotFoundException;
 import com.project.CommunityManagementSystemAPI.mappers.UserMapper;
 import com.project.CommunityManagementSystemAPI.model.entity.Users;
 import com.project.CommunityManagementSystemAPI.repository.UserRepository;
@@ -27,7 +28,7 @@ public class UserService {
 
       // Find the user by ID if not found, throw an exception
       Users userToAcess = userRepository.findById(userId)
-            .orElseThrow(() -> new UserNotFoundException("User not found"));
+            .orElseThrow(() -> new NotFoundException("User not found"));
 
       // Get the authenticated user
       Users authenticatedUser = getAuthenticatedUsers();
@@ -45,7 +46,7 @@ public class UserService {
 
       // Find the user by ID if not found, throw an exception
       Users userToUpdate = userRepository.findById(userId)
-            .orElseThrow(() -> new UserNotFoundException("User not found"));
+            .orElseThrow(() -> new NotFoundException("User not found"));
 
       // Get the authenticated user
       Users authenticatedUser = getAuthenticatedUsers();
@@ -70,6 +71,6 @@ public class UserService {
       String authenticatedUserEmail = auth.getName();
 
       return userRepository.findByEmail(authenticatedUserEmail)
-            .orElseThrow(() -> new UserNotFoundException("User not found"));
+            .orElseThrow(() -> new NotFoundException("User not found"));
    }
 }

@@ -1,4 +1,4 @@
-package com.project.CommunityManagementSystemAPI.exceptions.custom.user;
+package com.project.CommunityManagementSystemAPI.exceptions.custom;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
