@@ -44,7 +44,7 @@ public class SecurityConfig {
         http
         // authorizing the endpoints 
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/api/profile/{id}").permitAll()
                         .anyRequest().authenticated())
 
                         // enabling basic authentication and disabling CSRF
