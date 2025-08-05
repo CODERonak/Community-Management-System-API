@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.project.CommunityManagementSystemAPI.dto.community.*;
+import com.project.CommunityManagementSystemAPI.exceptions.custom.AccessDeniedException;
 import com.project.CommunityManagementSystemAPI.exceptions.custom.NotFoundException;
 import com.project.CommunityManagementSystemAPI.mappers.CommunityMapper;
 import com.project.CommunityManagementSystemAPI.model.entity.Community;
@@ -31,6 +32,30 @@ public class CommunityService {
         Community community = mapper.toEntity(request, owner);
         Community savedCommunity = communityRepository.save(community);
         return mapper.toResponse(savedCommunity);
+    }
+
+    public CommunityResponse getCommunityByName(String communityName) {
+        Community community = communityRepository.findByName(communityName)
+                .orElseThrow(() -> new NotFoundException("Community not found."));
+
+        return mapper.toResponse(community);
+    }
+
+    public CommunityResponse updateCommunityByName(String communityName, CommunityRequest request) {
+        Users authenticatedUser = getAuthenticatedUser();
+
+        Community community = communityRepository.findByName(communityName)
+                .orElseThrow(() -> new NotFoundException("Community not found."));
+
+        if (community.getOwner().getUser().getId() != authenticatedUser.getId()) {
+            throw new AccessDeniedException("You are not authorized to update this community.");
+        }
+
+        community.setName(request.getName());
+        community.setDescription(request.getDescription());
+
+        Community updatedCommunity = communityRepository.save(community);
+        return mapper.toResponse(updatedCommunity);
     }
 
     private Users getAuthenticatedUser() {

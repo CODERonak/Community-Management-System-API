@@ -22,4 +22,16 @@ public class CommunityController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{searchByName}")
+    public ResponseEntity<CommunityResponse> getCommunityByName(@PathVariable String searchByName) {
+        CommunityResponse response = service.getCommunityByName(searchByName);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{communityName}")
+    public ResponseEntity<CommunityResponse> updateCommunityByName(@PathVariable String communityName,
+            @RequestBody @Valid CommunityRequest request) {
+        CommunityResponse response = service.updateCommunityByName(communityName, request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
