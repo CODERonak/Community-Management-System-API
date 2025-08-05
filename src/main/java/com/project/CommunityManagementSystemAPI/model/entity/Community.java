@@ -20,7 +20,7 @@ public class Community {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_username", referencedColumnName = "username")
     private Profile owner;
 }
