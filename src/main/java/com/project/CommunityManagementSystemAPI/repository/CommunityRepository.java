@@ -9,5 +9,6 @@ import com.project.CommunityManagementSystemAPI.model.entity.Community;
 
 @Repository
 public interface CommunityRepository extends JpaRepository<Community, Long> {
+    // Custom query to find a community by name
     Optional<Community> findByName(String name);
 }
