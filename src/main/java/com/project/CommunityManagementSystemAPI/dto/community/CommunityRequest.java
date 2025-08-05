@@ -14,7 +14,4 @@ public class CommunityRequest {
 
     @NotBlank(message = "Description cannot be blank")
     private String description;
-
-    @NotBlank
-    private String ownerUsername;
 }
