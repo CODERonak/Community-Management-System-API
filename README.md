@@ -13,11 +13,11 @@ A scalable, production-ready **Java Spring Boot API** for managing users, commun
 
 * 🔐 **JWT-based Authentication**
 * 🧑‍🤝‍🧑 Community creation & management
-* 📝 Create and manage posts & comments
+* 📝 Post and comment support
 * ☁️ **Google Cloud deployment-ready**
 * 🧱 Clean, modular architecture (`Controller → Service → Repository`)
 * 🔄 DTOs with validation and mapping via **MapStruct**
-* 📊 Monitoring & health checks using **Spring Boot Actuator**
+* 📊 Monitoring & health checks with **Spring Boot Actuator**
 
 ---
 
@@ -29,13 +29,13 @@ A scalable, production-ready **Java Spring Boot API** for managing users, commun
 | **Spring Web**           | REST API support               |
 | **Spring Data JPA**      | Database interactions          |
 | **Spring Security**      | Authentication & authorization |
-| **Hibernate Validator**  | Request validation             |
-| **Lombok**               | Boilerplate code reduction     |
+| **Hibernate Validator**  | Input validation               |
+| **Lombok**               | Boilerplate reduction          |
 | **MapStruct**            | DTO ↔ Entity mapping           |
-| **MySQL / PostgreSQL**   | Relational database support    |
-| **Spring Boot Actuator** | Monitoring & health endpoints  |
+| **MySQL / PostgreSQL**   | Relational database            |
+| **Spring Boot Actuator** | Monitoring & metrics           |
 | **Spring Cloud** (opt.)  | Config & service discovery     |
-| **Google Cloud**         | Cloud deployment               |
+| **Google Cloud**         | Deployment platform            |
 
 ---
 
@@ -60,7 +60,7 @@ src/
         └── application.properties
 ```
 
-> 🔒 `application.properties` is **excluded from version control** for security reasons (credentials & secrets).
+> 🔒 `application.properties` is excluded from version control for security reasons (credentials & secrets).
 
 ---
 
@@ -113,7 +113,7 @@ public enum Role {
 
 * ✅ JWT-based stateless authentication
 * 🔐 Role-based access control (`ADMIN`, `MEMBER`)
-* 🔒 Passwords are securely hashed using **BCrypt**
+* 🔒 Passwords hashed using **BCrypt**
 * 🚫 No session state stored on the server
 
 ---
@@ -140,15 +140,24 @@ public enum Role {
 
 ### 🧑‍💼 **ProfileController**
 
-| Method | Endpoint                         | Description                  |
-| ------ | -------------------------------- | ---------------------------- |
-| POST   | `/api/profile/create`            | Create user profile          |
-| GET    | `/api/profile/{username}`        | Get user profile by username |
-| PUT    | `/api/profile/update/{username}` | Update profile by username   |
+| Method | Endpoint                         | Description                |
+| ------ | -------------------------------- | -------------------------- |
+| POST   | `/api/profile/create`            | Create a user profile      |
+| GET    | `/api/profile/{username}`        | Get profile by username    |
+| PUT    | `/api/profile/update/{username}` | Update profile by username |
+
+---
+
+### 🏘️ **CommunityController**
+
+| Method | Endpoint                                | Description              |
+| ------ | --------------------------------------- | ------------------------ |
+| POST   | `/api/community/create`                 | Create a new community   |
+| GET    | `/api/community/{searchByName}`         | Get community by name    |
+| PUT    | `/api/community/update/{communityName}` | Update community by name |
 
 > **Coming soon:**
 >
-> * `CommunityController`
 > * `PostController`
 > * `CommentController`
 
@@ -156,14 +165,14 @@ public enum Role {
 
 ## ⚙️ Example `application.properties`
 
-> ℹ️ This file is excluded from Git. Below is a **sample** configuration.
+> ℹ️ This file is excluded from version control. Below is a **sample configuration**:
 
 ```properties
 # App Info
 spring.application.name=CommunityManagementSystemAPI
 spring.profiles.active=mysql
 
-# DB Config (Google Cloud SQL)
+# Database Config (Google Cloud SQL)
 spring.cloud.gcp.sql.database-name=COMMUNITY
 spring.cloud.gcp.sql.instance-connection-name=my-instance
 spring.datasource.username=myusername
@@ -175,7 +184,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
-# Security Credentials
+# Spring Security (default credentials)
 spring.security.user.name=boot
 spring.security.user.password=spring
 
@@ -189,9 +198,9 @@ jwt.expiration=360000000
 ## ☁️ Google Cloud Deployment
 
 * ✅ Dockerized Spring Boot application
-* ✅ Connects to **Cloud SQL (MySQL/PostgreSQL)**
+* ✅ Integrated with **Cloud SQL (MySQL/PostgreSQL)**
 * ⛔ Optional: Spring Cloud Config Server
-* 🚀 Supports deployment to:
+* 🚀 Deployment-ready for:
 
   * **Cloud Run**
   * **App Engine**
