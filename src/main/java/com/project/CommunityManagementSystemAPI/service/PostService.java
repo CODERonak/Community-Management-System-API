@@ -1,5 +1,7 @@
 package com.project.CommunityManagementSystemAPI.service;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,14 @@ public class PostService {
         Post savedPost = postRepository.save(post);
 
         return mapper.toResponse(savedPost);
+    }
+
+    public List<PostResponse> getAllPostsByCommunity(long communityId) {
+        communityRepository.findById(communityId)
+                .orElseThrow(() -> new NotFoundException("Community not found."));
+
+        List<Post> posts = postRepository.findByCommunityId(communityId);
+        return mapper.toResponseList(posts);
     }
 
     private Users getAuthenticatedUser() {

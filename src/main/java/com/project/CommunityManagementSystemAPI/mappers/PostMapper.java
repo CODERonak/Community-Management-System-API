@@ -1,5 +1,7 @@
 package com.project.CommunityManagementSystemAPI.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -20,4 +22,5 @@ public interface PostMapper {
     @Mapping(target = "communityId", source = "post.community.id")
     PostResponse toResponse(Post post);
 
+    List<PostResponse> toResponseList(List<Post> posts);
 }

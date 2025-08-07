@@ -1,5 +1,7 @@
 package com.project.CommunityManagementSystemAPI.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,5 +21,11 @@ public class PostController {
     public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest request) {
         PostResponse response = service.createPost(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/posts/{communityId}")
+    public ResponseEntity<List<PostResponse>> getAllPostsByCommunity(@PathVariable long communityId) {
+        List<PostResponse> response = service.getAllPostsByCommunity(communityId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
