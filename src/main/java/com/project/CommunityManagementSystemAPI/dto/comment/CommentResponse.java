@@ -11,6 +11,6 @@ public class CommentResponse {
 
     private Long id;
     private Long postId;
-    private String authorId;
+    private Long authorId;
     private String content;
 }
