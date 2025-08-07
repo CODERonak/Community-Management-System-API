@@ -21,9 +21,13 @@ public class CommentService {
     private final UserRepository userRepository;
     private final CommentMapper commentMapper;
 
+    // method for creating a comment
     public CommentResponse createComment(Long postId, CommentRequest request) {
 
+        // Find the author
         Users user = getAuthenticatedUser();
+
+        // Check if the author has a profile
         Profile author = profileRepository.findByUser(user)
                 .orElseThrow(() -> new NotFoundException("You don't have a profile, please create one."));
 
@@ -38,6 +42,7 @@ public class CommentService {
         return commentMapper.toResponse(saved);
     }
 
+    // Helper method to get the authenticated user
     private Users getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();

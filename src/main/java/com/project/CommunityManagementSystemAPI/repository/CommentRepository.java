@@ -4,6 +4,7 @@ import com.project.CommunityManagementSystemAPI.model.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
+// Repository for comment-related operations
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByPostId(Long postId);
 }

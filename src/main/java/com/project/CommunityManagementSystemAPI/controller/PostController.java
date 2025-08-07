@@ -11,12 +11,14 @@ import com.project.CommunityManagementSystemAPI.service.PostService;
 
 import lombok.AllArgsConstructor;
 
+// Controller for post-related operations
 @RestController
 @RequestMapping("/api/community")
 @AllArgsConstructor
 public class PostController {
     private final PostService service;
 
+    // method for creating a post
     @PostMapping("/{communityId}/posts/create")
     public ResponseEntity<PostResponse> createPost(
             @PathVariable long communityId,
@@ -26,6 +28,7 @@ public class PostController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    // method for getting all posts by id
     @GetMapping("/posts/{communityId}")
     public ResponseEntity<List<PostResponse>> getAllPostsByCommunity(@PathVariable long communityId) {
         List<PostResponse> response = service.getAllPostsByCommunity(communityId);

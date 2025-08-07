@@ -2,6 +2,7 @@ package com.project.CommunityManagementSystemAPI.dto.post;
 
 import lombok.Data;
 
+// DTO for post response
 @Data
 public class PostResponse {
     private Long id;

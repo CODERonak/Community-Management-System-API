@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.CommunityManagementSystemAPI.model.entity.Post;
 
+// Repository for post-related operations
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByAuthorUsername(String username);

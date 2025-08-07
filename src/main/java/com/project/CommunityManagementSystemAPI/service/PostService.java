@@ -25,30 +25,34 @@ public class PostService {
 
     public PostResponse createPost(long communityId, PostRequest request) {
         Users authenticatedUser = getAuthenticatedUser();
-    
+
         // Check if the authenticated user has a profile
         Profile author = profileRepository.findByUser(authenticatedUser)
                 .orElseThrow(() -> new NotFoundException("You don't have a profile, please create one."));
-    
+
         // Get the community by ID instead of by owner
         Community community = communityRepository.findById(communityId)
                 .orElseThrow(() -> new NotFoundException("Community not found."));
-    
+
         Post post = mapper.toEntity(request, author, community);
         Post savedPost = postRepository.save(post);
-    
+
         return mapper.toResponse(savedPost);
     }
-    
 
+    // methods for Get all posts by username
     public List<PostResponse> getAllPostsByCommunity(long communityId) {
+
+        // Check if the community exists
         communityRepository.findById(communityId)
                 .orElseThrow(() -> new NotFoundException("Community not found."));
 
+        // Fetch posts by community ID
         List<Post> posts = postRepository.findByCommunityId(communityId);
         return mapper.toResponseList(posts);
     }
 
+    // methods for getting all posts by the user
     private Users getAuthenticatedUser() {
         // Get the authenticated user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

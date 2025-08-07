@@ -3,7 +3,7 @@ package com.project.CommunityManagementSystemAPI.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-// Entity for user details
+// Entity for post details
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,10 +20,12 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
+    // Many-to-one relationship with Profile entity for author
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Profile author;
 
+    // Many-to-one relationship with Community entity for community
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "community_id")
     private Community community;

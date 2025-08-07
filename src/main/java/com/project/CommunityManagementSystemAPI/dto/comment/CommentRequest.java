@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+// request for creating a comment
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
