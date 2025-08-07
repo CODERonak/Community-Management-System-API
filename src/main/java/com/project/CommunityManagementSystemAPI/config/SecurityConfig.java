@@ -45,7 +45,8 @@ public class SecurityConfig {
                 // authorizing the endpoints
                 .authorizeHttpRequests(requests -> requests
                         // public endpoints
-                        .requestMatchers("/api/auth/**", "/api/profile/{username}", "/api/community/{searchByName}", "/api/community/posts/{communityId}")
+                        .requestMatchers("/api/auth/**", "/api/profile/{username}", "/api/community/{searchByName}",
+                                "/api/community/posts/{communityId}", "api/community/{postId}/comments")
                         .permitAll()
                         .anyRequest().authenticated())
 

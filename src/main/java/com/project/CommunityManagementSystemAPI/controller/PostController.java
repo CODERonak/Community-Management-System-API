@@ -17,9 +17,12 @@ import lombok.AllArgsConstructor;
 public class PostController {
     private final PostService service;
 
-    @PostMapping("/posts/create")
-    public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest request) {
-        PostResponse response = service.createPost(request);
+    @PostMapping("/{communityId}/posts/create")
+    public ResponseEntity<PostResponse> createPost(
+            @PathVariable long communityId,
+            @RequestBody PostRequest request) {
+
+        PostResponse response = service.createPost(communityId, request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

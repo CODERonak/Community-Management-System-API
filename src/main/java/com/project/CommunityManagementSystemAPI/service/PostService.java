@@ -23,22 +23,23 @@ public class PostService {
     private final UserRepository userRepository;
     private final PostMapper mapper;
 
-    public PostResponse createPost(PostRequest request) {
+    public PostResponse createPost(long communityId, PostRequest request) {
         Users authenticatedUser = getAuthenticatedUser();
-
+    
         // Check if the authenticated user has a profile
         Profile author = profileRepository.findByUser(authenticatedUser)
                 .orElseThrow(() -> new NotFoundException("You don't have a profile, please create one."));
-
-        Community community = communityRepository.findByOwner(author)
+    
+        // Get the community by ID instead of by owner
+        Community community = communityRepository.findById(communityId)
                 .orElseThrow(() -> new NotFoundException("Community not found."));
-
+    
         Post post = mapper.toEntity(request, author, community);
-
         Post savedPost = postRepository.save(post);
-
+    
         return mapper.toResponse(savedPost);
     }
+    
 
     public List<PostResponse> getAllPostsByCommunity(long communityId) {
         communityRepository.findById(communityId)
