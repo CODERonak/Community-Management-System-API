@@ -3,7 +3,16 @@
 
 # 🏘️ Community Management System API
 
-A scalable, production-ready **Java Spring Boot API** for managing users, communities, posts, and comments — built with clean architecture and ready for cloud deployment.
+A scalable, production-ready **Java Spring Boot API** for managing users, communities, posts, and comments — built with clean architecture and deployed on **Google Cloud Run**.
+
+> ✅ **Live API:**
+> This API is currently deployed to **Google Cloud Run** and will be available for the next 4–5 days:
+> 🔗 [Live API Endpoint](https://community-system-753662617279.us-central1.run.app)
+
+> 📬 **Postman Collection:**
+> To test the API (authentication, profile, community, post, and comment operations), use the Postman collection below.
+> You will need a **JWT token** after logging in to access protected routes.
+> 🔗 [Community Management System — Postman Collection](https://www.postman.com/flight-technologist-23919603/the-public-api-s/collection/pgxgqsj/community-mangement-system?action=share&creator=42910295)
 
 ---
 
@@ -208,13 +217,9 @@ jwt.expiration=360000000
 ## ☁️ Google Cloud Deployment
 
 * ✅ Dockerized Spring Boot application
-* ✅ Integrated with **Cloud SQL** (MySQL/PostgreSQL)
-* ⛔ Optional: Spring Cloud Config Server
-* 🚀 Deployment-ready for:
-
-  * **Cloud Run**
-  * **App Engine**
-  * **Compute Engine**
+* ✅ Connected to **Cloud SQL (MySQL)**
+* ✅ Deployed via **Google Cloud Run**
 
 ---
 
+Let me know if you'd like this exported to a `.md` file or integrated into your GitHub repository.
