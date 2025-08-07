@@ -3,8 +3,6 @@
 
 # 🏘️ Community Management System API
 
-> ⚠️ **This API is currently under active development.**
-
 A scalable, production-ready **Java Spring Boot API** for managing users, communities, posts, and comments — built with clean architecture and ready for cloud deployment.
 
 ---
@@ -13,7 +11,7 @@ A scalable, production-ready **Java Spring Boot API** for managing users, commun
 
 * 🔐 **JWT-based Authentication**
 * 🧑‍🤝‍🧑 Community creation & management
-* 📝 Post and comment support
+* 📝 Support for posts and comments
 * ☁️ **Google Cloud deployment-ready**
 * 🧱 Clean, modular architecture (`Controller → Service → Repository`)
 * 🔄 DTOs with validation and mapping via **MapStruct**
@@ -114,7 +112,7 @@ public enum Role {
 * ✅ JWT-based stateless authentication
 * 🔐 Role-based access control (`ADMIN`, `MEMBER`)
 * 🔒 Passwords hashed using **BCrypt**
-* 🚫 No session state stored on the server
+* 🚫 No server-side session storage
 
 ---
 
@@ -156,10 +154,22 @@ public enum Role {
 | GET    | `/api/community/{searchByName}`         | Get community by name    |
 | PUT    | `/api/community/update/{communityName}` | Update community by name |
 
-> **Coming soon:**
->
-> * `PostController`
-> * `CommentController`
+---
+
+### 📝 **PostController**
+
+| Method | Endpoint                                    | Description                  |
+| ------ | ------------------------------------------- | ---------------------------- |
+| POST   | `/api/community/{communityId}/posts/create` | Create a post in a community |
+| GET    | `/api/community/posts/{communityId}`        | Get all posts in a community |
+
+---
+
+### 💬 **CommentController**
+
+| Method | Endpoint                           | Description                      |
+| ------ | ---------------------------------- | -------------------------------- |
+| POST   | `/api/community/{postId}/comments` | Add a comment to a specific post |
 
 ---
 
@@ -198,7 +208,7 @@ jwt.expiration=360000000
 ## ☁️ Google Cloud Deployment
 
 * ✅ Dockerized Spring Boot application
-* ✅ Integrated with **Cloud SQL (MySQL/PostgreSQL)**
+* ✅ Integrated with **Cloud SQL** (MySQL/PostgreSQL)
 * ⛔ Optional: Spring Cloud Config Server
 * 🚀 Deployment-ready for:
 
@@ -207,3 +217,4 @@ jwt.expiration=360000000
   * **Compute Engine**
 
 ---
+
