@@ -6,8 +6,7 @@
 A scalable, production-ready **Java Spring Boot API** for managing users, communities, posts, and comments — built with clean architecture and deployed on **Google Cloud Run**.
 
 > ✅ **Live API:**
-> This API is currently deployed to **Google Cloud Run** and will be available for the next 4–5 days:
-> 🔗 [Live API Endpoint](https://community-system-753662617279.us-central1.run.app)
+> This API was deployed to **Google Cloud Run** and for now the live api link is not available
 
 > 📬 **Postman Collection:**
 > To test the API (authentication, profile, community, post, and comment operations), use the Postman collection below.
